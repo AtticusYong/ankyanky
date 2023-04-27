@@ -13,6 +13,7 @@
     "js-tokens": "^4.0.0",
     "loose-envify": "^1.4.0",
     "mini-create-react-context": "^0.4.1",
+    "mongoose": "^7.1.0",
     "object-assign": "^4.1.1",
     "path-to-regexp": "^1.8.0",
     "prop-types": "^15.8.1",
