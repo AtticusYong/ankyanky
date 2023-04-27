@@ -1,0 +1,1 @@
+browser doesn't render the js unlike Brad's. Instead need to refresh browser. maybe the react-router-dom (react-router-bootstrap) version 5 which is not the latest. next time try with version 6.
