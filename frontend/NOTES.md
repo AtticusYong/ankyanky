@@ -12,3 +12,5 @@ type: module
 import
 .js
 export
+
+throw new Error() instead of res.json .... no need to use next(error)? see chapter 25
