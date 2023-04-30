@@ -2,7 +2,7 @@ import React from 'react';
 // import ReactDOM from 'react-dom/client';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux'
-import store from './store.js' // no js ext?
+import store from './store' // no js ext?
 import './bootstrap.min.css'
 import './index.css';
 import App from './App';
