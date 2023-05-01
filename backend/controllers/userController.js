@@ -1,26 +1,37 @@
+// doesn't work with ../utils/generateToken.js ... no sure why.....so I use jwt.sign() directly for now
+
+
 import asyncHandler from "express-async-handler";
+// import generateToken from '../utils/generateToken.js'
+
 import User from "../models/userModel.js";
+import jwt from "jsonwebtoken";
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-//   res.send({ email, password });
-    const user = await User.findOne({email})
+  //   res.send({ email, password });
+  const user = await User.findOne({ email });
 
-    if (user && (await user.matchPassword(password))) {
-        res.json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin,
-            token: null
-        })
-    } else {
-        res.status(401)
-        throw new Error('Invalid email or password')
-    }
+  const id = user._id;
+
+  if (user && (await user.matchPassword(password))) {
+
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: "30d",
+      }),
+    });
+  } else {
+    res.status(401);
+    throw new Error("Invalid email or password");
+  }
 });
 
 export { authUser };
