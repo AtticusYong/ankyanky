@@ -1,6 +1,5 @@
 // doesn't work with ../utils/generateToken.js ... no sure why.....so I use jwt.sign() directly for now
 
-
 import asyncHandler from "express-async-handler";
 // import generateToken from '../utils/generateToken.js'
 
@@ -15,16 +14,15 @@ const authUser = asyncHandler(async (req, res) => {
   //   res.send({ email, password });
   const user = await User.findOne({ email });
 
-  const id = user._id;
+  //   const id = user._id;
 
   if (user && (await user.matchPassword(password))) {
-
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: jwt.sign({ id }, process.env.JWT_SECRET, {
+      token: jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
         expiresIn: "30d",
       }),
     });
@@ -34,4 +32,23 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser };
+// @desc    Get user profile
+// @route   GET /api/users/profile
+// @access  Private
+const getUserProfile = asyncHandler(async (req, res) => {
+    // forgotten await and empty object {} was returned
+  const user = await User.findById(req.user._id)
+  if(user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+export { authUser, getUserProfile };
