@@ -18,3 +18,8 @@ throw new Error() instead of res.json .... no need to use next(error)? see chapt
 you can pass {id, name, email} to user object in a function...doesn't have to be matching?
 
 history?
+history.push('/path')   // go to '/path'
+
+import {Link} from rect-redux-dom ? some info/warning message about module...
+
+how to display 2 decimal places again? Number? to?
