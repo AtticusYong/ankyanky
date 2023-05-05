@@ -23,3 +23,9 @@ history.push('/path')   // go to '/path'
 import {Link} from rect-redux-dom ? some info/warning message about module...
 
 how to display 2 decimal places again? Number? to?
+
+why in PlaceOrderScreen.js need const orderCreate? and why above const placeOrderHandler?
+
+need to pass in history in prop? as in const PlaceOrderScreen
+
+Lecture 57. at ts=10:58/15:25 --------I don't have that error that complains about order._id i.e. React Hook useEffect has a missing dependency: 'order._id'. Either include it or removethe dependency array react-hooks/exhaustive-deps. Search for the keywords to learn more about each warning. To ignore, add //eslint-disable-next-line to the line before.
