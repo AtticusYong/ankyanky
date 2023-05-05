@@ -29,3 +29,5 @@ why in PlaceOrderScreen.js need const orderCreate? and why above const placeOrde
 need to pass in history in prop? as in const PlaceOrderScreen
 
 Lecture 57. at ts=10:58/15:25 --------I don't have that error that complains about order._id i.e. React Hook useEffect has a missing dependency: 'order._id'. Either include it or removethe dependency array react-hooks/exhaustive-deps. Search for the keywords to learn more about each warning. To ignore, add //eslint-disable-next-line to the line before.
+
+Lect.58 at 2:27/5:24 in orderController.js, populate('user', 'name email') and not populate('user', 'name', 'email')
