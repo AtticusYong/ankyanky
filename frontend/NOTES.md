@@ -31,3 +31,5 @@ need to pass in history in prop? as in const PlaceOrderScreen
 Lecture 57. at ts=10:58/15:25 --------I don't have that error that complains about order._id i.e. React Hook useEffect has a missing dependency: 'order._id'. Either include it or removethe dependency array react-hooks/exhaustive-deps. Search for the keywords to learn more about each warning. To ignore, add //eslint-disable-next-line to the line before.
 
 Lect.58 at 2:27/5:24 in orderController.js, populate('user', 'name email') and not populate('user', 'name', 'email')
+
+Lect. 60 whast did he mean set loading: true at start of lecture video? Also, updating qty in the cart doesn't recalculate the prices in the order screen. Reload order screen causes problem. and Name and email doesn't appear along with shipping address.
