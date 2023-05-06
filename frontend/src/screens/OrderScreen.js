@@ -35,8 +35,10 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
-    dispatch(getOrderDetails(orderId));
-  }, [dispatch]); // why lecture doesn't include [dispatch] ?
+    if (!order || order._id !== orderId) {
+      dispatch(getOrderDetails(orderId));
+    }
+  }, [dispatch, order, orderId]); // why lecture doesn't include [dispatch] ?
 
   return loading ? (
     <Loader />
@@ -64,7 +66,9 @@ const OrderScreen = ({ match }) => {
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
-                <Message variant="success">Delivered on {order.deliveredAt}</Message>
+                <Message variant="success">
+                  Delivered on {order.deliveredAt}
+                </Message>
               ) : (
                 <Message variant="danger">Not Delivered</Message>
               )}
