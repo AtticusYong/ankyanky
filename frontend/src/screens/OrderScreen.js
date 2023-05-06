@@ -38,7 +38,7 @@ const OrderScreen = ({ match }) => {
     if (!order || order._id !== orderId) {
       dispatch(getOrderDetails(orderId));
     }
-  }, [dispatch, order, orderId]); // why lecture doesn't include [dispatch] ?
+  }, [dispatch, order, orderId]); // why lecture doesn't include [dispatch] ? included in Lect. 63 3:29/6:14
 
   return loading ? (
     <Loader />
