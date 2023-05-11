@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { PayPalButton } from "react-paypal-button-v2";
 import { Link } from "react-router-dom";
 import {
   Button,
@@ -12,16 +14,22 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getOrderDetails } from "../actions/orderActions";
+import { getOrderDetails, payOrder } from "../actions/orderActions";
+import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
 const OrderScreen = ({ match }) => {
   const orderId = match.params.id;
+
+  const [sdkReady, setSdkReady] = useState();
 
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderCreate);
   const { order, loading, error } = orderDetails;
-  console.log(order);
+  // console.log(order);
+
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
 
   if (!loading) {
     //   Calculate prices
@@ -35,10 +43,38 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
-    if (!order || order._id !== orderId) {
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get("/api/config/paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
+
+    if (!order || successPay) {
+      dispatch({type: ORDER_PAY_RESET})
       dispatch(getOrderDetails(orderId));
+    } else if (!order.isPaid) {
+      if (!window.paypal) {
+        addPayPalScript();
+      } else {
+        setSdkReady(true);
+      }
     }
-  }, [dispatch, order, orderId]); // why lecture doesn't include [dispatch] ? included in Lect. 63 3:29/6:14
+
+    // if (!order || order._id !== orderId) {
+    //   dispatch(getOrderDetails(orderId));
+    // }
+  }, [dispatch, order, orderId, successPay]); // why lecture doesn't include [dispatch] ? included in Lect. 63 3:29/6:14
+
+  const successPaymentHandler = (paymentResult) => {
+    console.log(paymentResult)
+    dispatch(payOrder(orderId, paymentResult))
+  }
 
   return loading ? (
     <Loader />
@@ -151,6 +187,20 @@ const OrderScreen = ({ match }) => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroupItem>
+
+              {!order.isPaid && (
+                <ListGroupItem>
+                  {loadingPay && <Loader />}
+                  {!sdkReady ? (
+                    <Loader />
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    ></PayPalButton>
+                  )}
+                </ListGroupItem>
+              )}
             </ListGroup>
           </Card>
         </Col>
