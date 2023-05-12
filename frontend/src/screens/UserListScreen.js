@@ -6,19 +6,26 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { listUsers } from "../actions/userActions";
 
-const UserListScreen = () => {
+const UserListScreen = ({history}) => {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
-    const userList = useSelector(state => state.userList)
-    const {loading, error, users} = userList
+  const userList = useSelector((state) => state.userList);
+  const { loading, error, users } = userList;
 
-    useEffect(() => {
-        dispatch(listUsers())
-    }, [dispatch])
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-    const deleteHandler = (id) => {
-        console.log("delete")
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listUsers());
+    } else {
+      history.push("/login");
     }
+  }, [dispatch, history]);
+
+  const deleteHandler = (id) => {
+    console.log("delete");
+  };
   return (
     <>
       <h1>Users</h1>
@@ -53,14 +60,18 @@ const UserListScreen = () => {
                   )}
                 </td>
                 <td>
-                    <LinkContainer to={`/user/${user._id}/edit`}>
-                        <Button variant="light" className="btn-sm">
-                            <i className="fas fa-edit"></i>
-                        </Button>
-                    </LinkContainer>
-                    <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(user._id)}>
-                        <i className="fas fa-trash"></i>
+                  <LinkContainer to={`/user/${user._id}/edit`}>
+                    <Button variant="light" className="btn-sm">
+                      <i className="fas fa-edit"></i>
                     </Button>
+                  </LinkContainer>
+                  <Button
+                    variant="danger"
+                    className="btn-sm"
+                    onClick={() => deleteHandler(user._id)}
+                  >
+                    <i className="fas fa-trash"></i>
+                  </Button>
                 </td>
               </tr>
             ))}
@@ -69,6 +80,6 @@ const UserListScreen = () => {
       )}
     </>
   );
-}
+};
 
-export default UserListScreen
+export default UserListScreen;
