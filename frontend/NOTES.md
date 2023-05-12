@@ -33,3 +33,7 @@ Lecture 57. at ts=10:58/15:25 --------I don't have that error that complains abo
 Lect.58 at 2:27/5:24 in orderController.js, populate('user', 'name email') and not populate('user', 'name', 'email')
 
 Lect. 60 whast did he mean set loading: true at start of lecture video? Also, updating qty in the cart doesn't recalculate the prices in the order screen. Reload order screen causes problem. and Name and email doesn't appear along with shipping address.
+
+Lect 65. Profile now doesn't display currently logged in user's profile. fixed earlier....not sure why no. orderListMy->orders doesn't show items? in browser redux state. Table not supported but need to import through react-bootstrap? (BT imported Table in 16:50/18:03) and some dfference in code e.g. check ProfileScreen.js. doesn't show orderListMy->orders:[{shippingAddress...}] in browswer. i.e. order is not listed in listMyOrder....
+
+Oh, regarding that profile showing previous user instead of current logged in user, BT noticed the bug and explains in the beginning of Lect 66.
