@@ -42,3 +42,25 @@ Oh, regarding that profile showing previous user instead of current logged in us
 Lect 71. Unable to send PUT request through Postman to update user info. Solution: add "isAdmin":false in the json object for the body e.g. {"name":"updatedName", "isAdmin":false}. See Q&A for more details.
 
 Lect. 70 replace mongoose function remove() with deleteOne(). remove() is deprecated.
+
+Lect. 72. Clean up unused variables:
+
+./src/screens/RegisterScreen.js
+[1]   Line 14:   'Loader' is defined but never used            no-unused-vars
+[1]   Line 28:  'loading' is assigned a value but never used  no-unused-vars
+[1] 
+[1] ./src/screens/PaymentScreen.js
+[1]   Line 2:  'FormControl' is defined but never used  no-unused-vars
+[1] 
+[1] ./src/screens/LoginScreen.js
+[1]   Line 6:    'Loader' is defined but never used            no-unused-vars
+[1]   Line 17:  'loading' is assigned a value but never used  no-unused-vars
+[1] 
+[1] ./src/screens/CartScreen.js
+[1]   Line 9:  'Form' is defined but never used  no-unused-vars
+
+but no missing dependency about 'userInfo' that BT had in UserListScreen.js useEffect
+
+add in RegisterScreen.js (was missing) in return statement     {loading && <Loader />}
+
+Lect 72. In UserEditScreen.js, forgot to replace setName with setEmail and setIsAdmin for those line statements in useEffect else block. Funny useEffect missing dependency warnig for dispatch, user, userId doesn't show in browser console but in my vscode console. something to do with react_devtools_backend.js setup in FF...maybe
