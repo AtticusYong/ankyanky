@@ -66,3 +66,5 @@ add in RegisterScreen.js (was missing) in return statement     {loading && <Load
 Lect 72. In UserEditScreen.js, forgot to replace setName with setEmail and setIsAdmin for those line statements in useEffect else block. Funny useEffect missing dependency warnig for dispatch, user, userId doesn't show in browser console but in my vscode console. something to do with react_devtools_backend.js setup in FF...maybe
 
 Lect 73. no need to pass history into useEffect? i.e. useEffect((history) => {}) e.g. in UserEditScreen.js?
+
+Lect 75. delete....getById().delete()? for the same route? what if the route for getting and not for delete? can share same route? how does middleware behave?
