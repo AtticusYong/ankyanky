@@ -135,7 +135,10 @@ const deleteUser = asyncHandler(async (req, res) => {
   if(user) {
 
     // unable to remove (not a function?)
-    await user.remove()
+    // await user.remove()
+    // remove is deprecated. use deleteOne.
+    await user.deleteOne()
+
     res.json({message:'User removed'})
   } else {
     res.status(400)

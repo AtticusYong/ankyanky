@@ -40,3 +40,5 @@ Oh, regarding that profile showing previous user instead of current logged in us
 
 
 Lect 71. Unable to send PUT request through Postman to update user info. Solution: add "isAdmin":false in the json object for the body e.g. {"name":"updatedName", "isAdmin":false}. See Q&A for more details.
+
+Lect. 70 replace mongoose function remove() with deleteOne(). remove() is deprecated.
