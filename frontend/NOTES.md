@@ -64,3 +64,5 @@ but no missing dependency about 'userInfo' that BT had in UserListScreen.js useE
 add in RegisterScreen.js (was missing) in return statement     {loading && <Loader />}
 
 Lect 72. In UserEditScreen.js, forgot to replace setName with setEmail and setIsAdmin for those line statements in useEffect else block. Funny useEffect missing dependency warnig for dispatch, user, userId doesn't show in browser console but in my vscode console. something to do with react_devtools_backend.js setup in FF...maybe
+
+Lect 73. no need to pass history into useEffect? i.e. useEffect((history) => {}) e.g. in UserEditScreen.js?
