@@ -37,3 +37,6 @@ Lect. 60 whast did he mean set loading: true at start of lecture video? Also, up
 Lect 65. Profile now doesn't display currently logged in user's profile. fixed earlier....not sure why no. orderListMy->orders doesn't show items? in browser redux state. Table not supported but need to import through react-bootstrap? (BT imported Table in 16:50/18:03) and some dfference in code e.g. check ProfileScreen.js. doesn't show orderListMy->orders:[{shippingAddress...}] in browswer. i.e. order is not listed in listMyOrder....
 
 Oh, regarding that profile showing previous user instead of current logged in user, BT noticed the bug and explains in the beginning of Lect 66.
+
+
+Lect 71. Unable to send PUT request through Postman to update user info. Solution: add "isAdmin":false in the json object for the body e.g. {"name":"updatedName", "isAdmin":false}. See Q&A
