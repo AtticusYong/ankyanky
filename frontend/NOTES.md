@@ -72,3 +72,9 @@ Lect 75. delete....getById().delete()? for the same route? what if the route for
 Lect. 79. After you create new product and then fill in the edit form and click update button and it goes back to product list page again....when you press edit button again, the form is not filled with the product details but with sample etc. the fix is mentioned in the Q&A @Serdar
 
 Lect. 81. Form.File in ProductEditScreen.js not supported with newer version of react-dom (see Q&A Dora). Using FormControl element with type="file" instead
+
+Lect. 82 Admin Order List
+
+    Issue: in React tools, state shows orders to be an empty list (mentioned earlier but not fixed yet). hence going to details page shows order is not there and returns error.
+
+    also though paid already, page shows not paid. there is a XORS message in browser console too. try to fix later.....
