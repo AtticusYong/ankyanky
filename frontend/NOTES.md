@@ -70,3 +70,5 @@ Lect 73. no need to pass history into useEffect? i.e. useEffect((history) => {})
 Lect 75. delete....getById().delete()? for the same route? what if the route for getting and not for delete? can share same route? how does middleware behave?
 
 Lect. 79. After you create new product and then fill in the edit form and click update button and it goes back to product list page again....when you press edit button again, the form is not filled with the product details but with sample etc. the fix is mentioned in the Q&A @Serdar
+
+Lect. 81. Form.File in ProductEditScreen.js not supported with newer version of react-dom (see Q&A Dora). Using FormControl element with type="file" instead
