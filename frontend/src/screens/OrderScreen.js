@@ -23,7 +23,7 @@ const OrderScreen = ({ match }) => {
 
   const dispatch = useDispatch();
 
-  const orderDetails = useSelector((state) => state.orderCreate);
+  const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
   // console.log(order);
 
