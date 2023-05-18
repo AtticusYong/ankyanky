@@ -9,26 +9,38 @@ import {
   Image,
   Card,
   ListGroupItem,
+  Button,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getOrderDetails, payOrder } from "../actions/orderActions";
-import { ORDER_PAY_RESET } from "../constants/orderConstants";
+import { deliverOrder, getOrderDetails, payOrder } from "../actions/orderActions";
+import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from "../constants/orderConstants";
 
-const OrderScreen = ({ match }) => {
+
+// make sure -> BT addendum comments at the end of Lect. 83 video
+
+// make sure passed in history
+const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
 
   const [sdkReady, setSdkReady] = useState();
 
   const dispatch = useDispatch();
-
-  const orderDetails = useSelector((state) => state.orderCreate);
+  // bug with order not showing maybe here
+  // const orderDetails = useSelector((state) => state.orderCreate);
+  const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
   // console.log(order);
 
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   if (!loading) {
     //   Calculate prices
@@ -42,6 +54,10 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
+// make sure user logged in
+    if(!userInfo) {
+      history.push('/login')
+    }
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
       const script = document.createElement("script");
@@ -54,8 +70,11 @@ const OrderScreen = ({ match }) => {
       document.body.appendChild(script);
     };
 
-    if (!order || successPay) {
+    // another bug see Q&A Kurt added order._id != orderId because order detail page shows previous detail page even though different order detail selected
+
+    if (!order || successPay || successDeliver || order._id != orderId) {
       dispatch({type: ORDER_PAY_RESET})
+      dispatch({type: ORDER_DELIVER_RESET})
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -68,13 +87,17 @@ const OrderScreen = ({ match }) => {
     // if (!order || order._id !== orderId) {
     //   dispatch(getOrderDetails(orderId));
     // }
-  }, [dispatch, order, orderId, successPay]); // why lecture doesn't include [dispatch] ? included in Lect. 63 3:29/6:14
+  }, [dispatch, order, orderId, successPay, successDeliver, history, userInfo]); // why lecture doesn't include [dispatch] ? included in Lect. 63 3:29/6:14
 
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult)
     dispatch(payOrder(orderId, paymentResult))
   }
 
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order))
+  }
+  
   return loading ? (
     <Loader />
   ) : error ? (
@@ -198,6 +221,15 @@ const OrderScreen = ({ match }) => {
                       onSuccess={successPaymentHandler}
                     ></PayPalButton>
                   )}
+                </ListGroupItem>
+              )}
+              {loadingDeliver && <Loader /> }
+              {/* make sure: user logged in first  */}
+              {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                <ListGroupItem>
+                  <Button type='button' className="btn btn-block" onClick={deliverHandler}>
+                    Mark As Delivered
+                  </Button>
                 </ListGroupItem>
               )}
             </ListGroup>

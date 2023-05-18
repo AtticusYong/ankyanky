@@ -73,8 +73,18 @@ Lect. 79. After you create new product and then fill in the edit form and click 
 
 Lect. 81. Form.File in ProductEditScreen.js not supported with newer version of react-dom (see Q&A Dora). Using FormControl element with type="file" instead
 
-Lect. 82 Admin Order List
+Lect. 82 Admin Order List (tried myself before seeing solution....)
 
     Issue: in React tools, state shows orders to be an empty list (mentioned earlier but not fixed yet). hence going to details page shows order is not there and returns error.
 
     also though paid already, page shows not paid. there is a XORS message in browser console too. try to fix later.....
+
+
+Lect. 83
+        OrderScreen.js
+        // another bug see Q&A Kurt (Reset order detail) added order._id != orderId because order detail page shows previous detail page even though different order detail selected
+
+        OrderActions.js
+        // another bug - see Q&A Othman (video 82...I keep getting unauthorized error)  add {} inside put method because unauthorized 401 returned
+
+
