@@ -72,7 +72,7 @@ const OrderScreen = ({ match, history }) => {
 
     // another bug see Q&A Kurt added order._id != orderId because order detail page shows previous detail page even though different order detail selected
 
-    if (!order || successPay || successDeliver || order._id != orderId) {
+    if (!order || successPay || successDeliver || order._id !== orderId) {
       dispatch({type: ORDER_PAY_RESET})
       dispatch({type: ORDER_DELIVER_RESET})
       dispatch(getOrderDetails(orderId));
