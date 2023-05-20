@@ -5,6 +5,8 @@ import Product from "../models/productModel.js";
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
+  const pageSize = 3
+  const page = Number(req.query.pageNumber) || 1
   const keyword = req.query.keyword ? {
     name: {
       $regex: req.query.keyword,
@@ -12,12 +14,14 @@ const getProducts = asyncHandler(async (req, res) => {
     }
   } : {}
 
-  const products = await Product.find({...keyword});
+  // no deprecatin warning for collection.count....otherwise, use Collection.countDocuments or Collection.estimatedDocumentCount
+  const count = await Product.count({...keyword})
+  const products = await Product.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
 
   // res.status(401)
   // throw new Error('Not Authorized')
 
-  res.json(products);
+  res.json({products, page, pages: Math.ceil(count / pageSize)});
 });
 
 // @desc    Fetch single product

@@ -92,6 +92,11 @@ https://stackoverflow.com/questions/67674208/form-inline-not-working-as-expected
 
 npm i bootstrap@4.6.0
 
+    in productActions.js: // missing '/' in front of api/....of GET mehod - this fixed the product search / PRODUCT_LIST_FAIL error
+
+    add search and paginate in App.js i.e. "/search/:keyword/page/:pageNumber"
+
+
 
 
 
