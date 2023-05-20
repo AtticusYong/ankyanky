@@ -87,4 +87,12 @@ Lect. 83
         OrderActions.js
         // another bug - see Q&A Othman (video 82...I keep getting unauthorized error)  add {} inside put method because unauthorized 401 returned
 
+Lect. 86 Search bar and search button not laid out inline. add class="d-flex" to Form component instead on inline in SearchBar.js (see Q&A Fahad) and 
+https://stackoverflow.com/questions/67674208/form-inline-not-working-as-expected-with-react-bootstrap. It seems react-bootstrap is meant to be used with Bootstrap V4.
+
+npm i bootstrap@4.6.0
+
+
+
+
 
