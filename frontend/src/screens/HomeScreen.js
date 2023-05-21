@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
@@ -23,6 +24,12 @@ const HomeScreen = ({match}) => {
 
   return (
     <>
+    <Helmet>
+      <title>Welcome To ProShop</title>
+      <meta name='description' content='We sell the best products for cheap' />
+      <meta name="keywords" content="electronics, buy electronics, cheap electronics" />
+
+    </Helmet>
     {!keyword && <ProductCarousel />}
       <h1>Latest Products</h1>
       {loading ? (
