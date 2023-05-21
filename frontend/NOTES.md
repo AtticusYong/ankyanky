@@ -98,6 +98,9 @@ npm i bootstrap@4.6.0
 
 
 
+Lect. 90 note the directories when running the npm commands:
+        cd frontend; npm run build; cd ..; npm start
 
+        read the Q&A for using render.com since heroku has stopped free tier
 
 
