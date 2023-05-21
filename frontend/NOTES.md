@@ -104,3 +104,25 @@ Lect. 90 note the directories when running the npm commands:
         read the Q&A for using render.com since heroku has stopped free tier
 
 
+Lect. 91 Deployed on render.com
+
+1. Connect to GitHub
+
+2. edit the following....
+
+environment variables:
+    NODE_ENV = development
+    PORT = 5000
+    MONGO_URI = mongodb+srv://blackbean:password@cluster0.nqat0.gcp.mongodb.net/proshop?retryWrites=true&w=majority
+    JWT_SECRET =  abc123
+    PAYPAL_CLIENT_ID = *************************************************************
+
+settings: 
+
+build and deploy (npm install from all package.jsons i.e. root(hmmm...maybe don't need from root), frontend, no need from backend since build i.e. follow what BT said
+in package.json:
+"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend")
+----------------
+{"name": "papaShop", "build command":"npm install && npm install --prefix frontend && npm run build --prefix frontend", "start command":"npm start"}
+
+
