@@ -1,10 +1,10 @@
 // doesn't work with ../utils/generateToken.js ... no sure why.....so I use jwt.sign() directly for now
+// fix bug: add return keyword in generateToken function
 
 import asyncHandler from "express-async-handler";
-// import generateToken from '../utils/generateToken.js'
-
+import generateToken from '../utils/generateToken.js'
 import User from "../models/userModel.js";
-import jwt from "jsonwebtoken";
+
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -22,9 +22,7 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "30d",
-      }),
+      token: generateToken(user._id),
     });
   } else {
     res.status(401);
@@ -57,9 +55,7 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "30d",
-      }),
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -106,9 +102,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
-      token: jwt.sign({ id: updatedUser._id }, process.env.JWT_SECRET, {
-        expiresIn: "30d",
-      }),
+      token: generateToken(updatedUser._id),
     });
 
   } else {
