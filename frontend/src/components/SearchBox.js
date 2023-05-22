@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { Form, Button, FormControl } from "react-bootstrap";
 
 const SearchBox = ({ history }) => {
@@ -29,4 +30,4 @@ const SearchBox = ({ history }) => {
   );
 };
 
-export default SearchBox;
+export default withRouter(SearchBox);

@@ -126,3 +126,20 @@ in package.json:
 {"name": "papaShop", "build command":"npm install && npm install --prefix frontend && npm run build --prefix frontend", "start command":"npm start"}
 
 
+Lect. 86 Product Search alternative approach to implementing SearchBox
+https://www.udemy.com/course/mern-ecommerce/learn/lecture/22499086#questions/13455716
+
+proshop\frontend\src\components\SearchBox.js
+
+    import React, { useState } from 'react'
+    import { withRouter } from 'react-router-dom' //+
+    import { Form, Button } from 'react-bootstrap'
+....
+export default withRouter(SearchBox) //+
+
+and in proshop\frontend\src\components\Header.js use
+<SearchBox />
+instead of
+<Route render={({ history }) => <SearchBox history={history} />} />
+
+
