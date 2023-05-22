@@ -25,7 +25,7 @@ h2 {
   display: flex;
 }
 
-.carousel.caption {
+.carousel-caption {
   position: absolute;
   top: 0;
 }
@@ -43,4 +43,8 @@ h2 {
 
 .carousel a {
   margin: 0 auto;
+}
+
+.carousel {
+  background-color: #fff;
 }
