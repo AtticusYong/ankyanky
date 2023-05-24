@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux'
 import store from './store' // no js ext?
-import './bootstrap.min.css'
+import './bootstrap/bootstrap_minty.min.css'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

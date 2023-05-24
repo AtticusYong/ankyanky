@@ -11,7 +11,8 @@ const Footer = () => {
                     Copyright &copy; ProShop
                 </Col>
             </Row>
-        </Container>footer</footer>
+        </Container>
+    </footer>
   )
 }
 

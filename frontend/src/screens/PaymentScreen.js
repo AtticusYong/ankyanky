@@ -14,6 +14,13 @@ const PaymentScreen = ({ history }) => {
         history.push('/shipping')
     }
 
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+
+    if(!userInfo) {
+      history.push('/login?redirect=payment')
+    }
+
     const [paymentMethod, setPaymentMethod] = useState('PayPal')
 
     const dispatch = useDispatch()

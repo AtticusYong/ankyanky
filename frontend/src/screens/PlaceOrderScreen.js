@@ -17,6 +17,13 @@ import { createOrder } from "../actions/orderActions";
 const PlaceOrderScreen = ({history}) => {
   const dispatch = useDispatch();
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  if(!userInfo) {
+    history.push('/login?redirect=placeorder')
+  }
+
   const cart = useSelector((state) => state.cart);
 
   //   Calculate prices

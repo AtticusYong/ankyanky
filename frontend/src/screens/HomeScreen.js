@@ -10,7 +10,7 @@ import { listProducts } from "../actions/productActions";
 import ProductCarousel from "../components/ProductCarousel"
 import Meta from "../components/Meta"
 
-const HomeScreen = ({match}) => {
+const HomeScreen = ({ match, history }) => {
   const keyword = match.params.keyword
   const pageNumber = match.params.pageNumber || 1
 
@@ -36,10 +36,10 @@ const HomeScreen = ({match}) => {
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
-      ) : (
+      ) : products ? (
         <>
           <Row>
-            {products.map((product) => (
+            {products && products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                 <Product product={product} />
               </Col>
@@ -51,6 +51,8 @@ const HomeScreen = ({match}) => {
             keyword={keyword ? keyword : ""}
           />
         </>
+      ) : (
+        history.push('/login')
       )}
     </>
   );
